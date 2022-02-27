@@ -4,6 +4,7 @@ const myData = require("./data");
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false})); 
+// pass encryption library import 
 const sha256 = require('js-sha256');
 
 // 3A krok 2 - first paths - main, users, schedules 
@@ -24,7 +25,8 @@ app.get("/users/:id", (req, res) => {
   const idNumber = req.params.id;
   if (idNumber >= myData.users.length){
     res.json("No such a user");
-    return;}
+    return;
+  }
   res.json(myData.users[idNumber]);
 });
 
@@ -32,7 +34,8 @@ app.get("/users/:id/schedules", (req, res) => {
   const idNumber = req.params.id;
   if (idNumber >= myData.users.length){
     res.json("No such a user");
-    return;}
+    return;
+  }
   const arr=[];
   for ( let i = 0; i < myData.schedules.length; i ++){
     if (idNumber==myData.schedules[i].user_id){

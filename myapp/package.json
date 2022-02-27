@@ -1,0 +1,26 @@
+{
+  "name": "myapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon myapp/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pl-incode/mr-coffee-backend-natwoj.git"
+  },
+  "author": "natwoj",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pl-incode/mr-coffee-backend-natwoj/issues"
+  },
+  "homepage": "https://github.com/pl-incode/mr-coffee-backend-natwoj#readme",
+  "dependencies": {
+    "express": "^4.17.3",
+    "js-sha256": "^0.9.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}

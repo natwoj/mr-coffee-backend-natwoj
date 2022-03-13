@@ -8,13 +8,23 @@ app.use(bodyParser.urlencoded({extended: false}));
 // pass encryption library import 
 const sha256 = require('js-sha256');
 
-// mustache require - 1/2
+// 3B - mustache require - 1/2
 const mustacheExpress = require('mustache-express');
 
-// 3A krok 2 - first paths - main, users, schedules 
+// 3B - configuring app // mustache 2/2
+  app.set('views', `${__dirname}/views`);
+  app.set('view engine', 'mustache');
+  app.engine('mustache', mustacheExpress());
+
+/* 3A krok 2 - first paths - main, users, schedules 
 app.get("/", (req, res) => {
   res.json("Welcome to our schedule website");
-});
+}); */
+
+// index.mustache rendering
+app.get('/', (req, res) => {
+  res.render('index', { my_h1: "mustache my h1"})
+})
 
 app.get("/users", (req, res) => {
   res.json(myData.users); 
@@ -79,10 +89,6 @@ app.post('/users', (req, res) => {
     res.json(b);
   })
 
-  // 3B - configuring app // mustache 2/2
-app.set('views', `${__dirname}/views`);
-app.set('view engine', 'mustache');
-app.engine('mustache', mustacheExpress());
 
   // listen to port 3000
 app.listen(3000, () => {

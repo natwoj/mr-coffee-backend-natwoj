@@ -7,18 +7,22 @@ Mustache is a template engine that can be used with express.
 
 ## Install
 
-1/
+
 ```bash
-npm i --save mustache-express
+1. npm i --save mustache-express
 ```
-2/ in index.js: 
 
-const mustacheExpress = require('mustache-express');
+/ In index.js: 
+```bash
+2. const mustacheExpress = require('mustache-express');
+```
 
-3/ app configuration in index.js: 
+/ App configuration in index.js: 
+```bash
 app.set('views', `${__dirname}/views`);
 app.set('view engine', 'mustache');
 app.engine('mustache', mustacheExpress());
+```
 
 ## Creating views 
 
@@ -27,11 +31,12 @@ app.engine('mustache', mustacheExpress());
 ```
  
 ```bash 
-2. touch views  
+2. mkdir views  
 ```
 
 ```bash 
-3. open index.mustache 
+3. touch index.mustache  
+open index.mustache 
 ```
 ```bash 
 creating html template in index.mustache

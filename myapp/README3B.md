@@ -21,16 +21,25 @@ app.set('view engine', 'mustache');
 app.engine('mustache', mustacheExpress());
 
 ## Creating views 
-1/
+
 ```bash 
-cd myapp 
+1. cd myapp 
 ```
-2/ 
+ 
 ```bash 
-touch views  
+2. touch views  
 ```
-3/
+
 ```bash 
-open index.mustache 
+3. open index.mustache 
 ```
-4/ creating html template in index.mustache
+```bash 
+creating html template in index.mustache
+```
+## Creating route to render index.mustache file 
+
+```bash 
+app.get('/', (req, res) => {
+  res.render('index', {})
+})
+```

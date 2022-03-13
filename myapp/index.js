@@ -4,8 +4,12 @@ const myData = require("./data");
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false})); 
+
 // pass encryption library import 
 const sha256 = require('js-sha256');
+
+// mustache require - 1/2
+const mustacheExpress = require('mustache-express');
 
 // 3A krok 2 - first paths - main, users, schedules 
 app.get("/", (req, res) => {
@@ -74,6 +78,11 @@ app.post('/users', (req, res) => {
     myData.schedules.push(b);
     res.json(b);
   })
+
+  // 3B - configuring app // mustache 2/2
+app.set('views', `${__dirname}/views`);
+app.set('view engine', 'mustache');
+app.engine('mustache', mustacheExpress());
 
   // listen to port 3000
 app.listen(3000, () => {

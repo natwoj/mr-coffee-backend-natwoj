@@ -5,6 +5,9 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false})); 
 
+// using static folder - css, images
+app.use('/static', express.static('static'))
+
 // pass encryption library import 
 const sha256 = require('js-sha256');
 
@@ -23,7 +26,7 @@ app.get("/", (req, res) => {
 
 // index.mustache rendering
 app.get('/', (req, res) => {
-  res.render('index', { my_h1: "mustache my h1"})
+  res.render('index', { my_schedules: "My schedule" })
 })
 
 app.get("/users", (req, res) => {

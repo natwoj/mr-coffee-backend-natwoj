@@ -4,6 +4,7 @@ const myData = require("./data");
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false})); 
+const functionsJs = require("./functions")
 
 // using static folder - css, images
 app.use('/static', express.static('static'))
@@ -19,22 +20,17 @@ const mustacheExpress = require('mustache-express');
   app.set('view engine', 'mustache');
   app.engine('mustache', mustacheExpress());
 
-/* 3A krok 2 - first paths - main, users, schedules 
-app.get("/", (req, res) => {
-  res.json("Welcome to our schedule website");
-}); */
-
 // index.mustache rendering
 app.get('/', (req, res) => {
-  res.render('index', { my_schedules: "My schedule" })
+  res.render('index', { title: "Schedule website for Mr. Coffee employees"})
 })
 
 app.get("/users", (req, res) => {
-  res.json(myData.users); 
-});
+  res.render('users', { title: "All users", users: functionsJs.addId(myData.users) }) 
+})
 
 app.get("/schedules", (req, res) => {
-  res.json(myData.schedules); 
+  res.render('schedules', { title: "Schedules", schedules: myData.schedules })
 });
 
 // 3a krok 3 - parameterized paths

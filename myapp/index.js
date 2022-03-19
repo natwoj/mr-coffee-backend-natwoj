@@ -4,7 +4,6 @@ const myData = require("./data");
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false})); 
-const functionsJs = require("./functions")
 
 // using static folder - css, images
 app.use('/static', express.static('static'))
@@ -26,40 +25,39 @@ app.get('/', (req, res) => {
 })
 
 app.get("/users", (req, res) => {
-  res.render('users', { title: "All users", users: functionsJs.addId(myData.users) }) 
+  const usersNumber = [...myData.users];
+  for (let i = 0; i < usersNumber.length; i++) {
+    usersNumber[i].id= i;
+  }
+  res.render('users', { title: "All users", users: usersNumber }) 
 })
 
 app.get("/schedules", (req, res) => {
-  res.render('schedules', { title: "Schedules", schedules: myData.schedules })
+  res.render('schedules', { title: "Schedules", schedules: myData.schedules})
+  
 });
 
-// 3a krok 3 - parameterized paths
-app.get("/users/:id", (req, res) => {
+app.get("/users/:id", (req, res, next) => {
   const idNumber = req.params.id;
-  if (idNumber >= myData.users.length){
-    res.json("No such a user");
-    return;
-  }
-  res.json(myData.users[idNumber]);
+  idNumber >= myData.users.length ? res.render('user_details', {'Title':'No such user'}) : res.render('user_details', {'Title': `User ${idNumber}`, 'users': myData.users[idNumber]});
 });
 
-app.get("/users/:id/schedules", (req, res) => {
+app.get("/users/:id/schedules", (req, res, next) => {
   const idNumber = req.params.id;
   if (idNumber >= myData.users.length){
-    res.json("No such a user");
-    return;
-  }
+    res.render('user_schedules', {'Title': "No such user"});
+    return;}
   const arr=[];
   for ( let i = 0; i < myData.schedules.length; i ++){
-    if (idNumber==myData.schedules[i].user_id){
+    if (idNumber == myData.schedules[i].user_id){
       arr.push(myData.schedules[i]);
     }
   }
   if (arr.length<1) {
-    res.json("Sign up for term");
+    res.render("user_schedules", {"Title": "Make an appointemnt"});
     return;
   }
-  res.json(arr);
+  res.render("user_schedules", {"Title": `User ${idNumber} schedule`, "schedule": arr });
 });
 
 // 3a krok 4 - paths to update data: users & schedules 

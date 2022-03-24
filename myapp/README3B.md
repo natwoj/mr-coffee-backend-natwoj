@@ -1,4 +1,4 @@
-# Mustache template engine
+# Mustache template engine - implementation to the project 
 
 ## About 
 

@@ -6,7 +6,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false})); 
 
 // using static folder - css, images
-app.use('/static', express.static('static'))
+app.use('/static', express.static('public'))
 
 // pass encryption library import 
 const sha256 = require('js-sha256');
@@ -19,48 +19,56 @@ const mustacheExpress = require('mustache-express');
   app.set('view engine', 'mustache');
   app.engine('mustache', mustacheExpress());
 
-// index.mustache rendering
-app.get('/', (req, res) => {
+// GET's - new user, new schedule form
+
+app.get("/schedules/new", (req, res) => {
+  res.render("new_schedule_form", { title: "Add new schedule"});
+});
+
+app.get("/users/new", (req, res) => {
+  res.render("new_user_form", { title: "Submit"});
+});
+
+app.get("/", (req, res) => {
   res.render('index', { title: "Schedule website for Mr. Coffee employees"})
 })
-
-app.get("/users", (req, res) => {
-  const usersNumber = [...myData.users];
-  for (let i = 0; i < usersNumber.length; i++) {
-    usersNumber[i].id= i;
-  }
-  res.render('users', { title: "All users", users: usersNumber }) 
-})
-
+app.get("/users", (req, res, next) => {
+    const usersNumber = [...myData.users];                  
+      for (let i = 0; i < usersNumber.length; i++) {
+          usersNumber[i].id = i;
+    }
+    res.render("users", { title: "All users",  users: usersNumber })
+  })
 app.get("/schedules", (req, res) => {
-  res.render('schedules', { title: "Schedules", schedules: myData.schedules})
+  res.render('schedules', { title: "All schedules", schedules: myData.schedules })
   
 });
 
 app.get("/users/:id", (req, res, next) => {
   const idNumber = req.params.id;
-  idNumber >= myData.users.length ? res.render('user_details', {'Title':'No such user'}) : res.render('user_details', {'Title': `User ${idNumber}`, 'users': myData.users[idNumber]});
+  idNumber >= myData.users.length ? res.render('user_details', {'title':'No such user'}) : res.render('user_details', {'title': `User ${idNumber}`, 'users': myData.users[idNumber]});
 });
 
 app.get("/users/:id/schedules", (req, res, next) => {
   const idNumber = req.params.id;
   if (idNumber >= myData.users.length){
-    res.render('user_schedules', {'Title': "No such user"});
-    return;}
-  const arr=[];
-  for ( let i = 0; i < myData.schedules.length; i ++){
+    res.render("user_schedules", {"title": "No such user"});
+    return;
+  }
+  const arr = [];
+  for (let i = 0; i < myData.schedules.length; i ++){
     if (idNumber == myData.schedules[i].user_id){
       arr.push(myData.schedules[i]);
     }
   }
-  if (arr.length<1) {
-    res.render("user_schedules", {"Title": "Make an appointemnt"});
+  if (arr.length < 1) {
+    res.render("user_schedules", {"title": "Set the date"});
     return;
   }
-  res.render("user_schedules", {"Title": `User ${idNumber} schedule`, "schedule": arr });
+  res.render("user_schedules", {"title": `User ${idNumber} schedules`, "schedule": arr });
 });
 
-// 3a krok 4 - paths to update data: users & schedules 
+// POST's
 app.post('/users', (req, res) => {
     const newUser = req.body;
     const b = {
@@ -71,7 +79,7 @@ app.post('/users', (req, res) => {
     }
     //newUser.password = sha256(newUser.password);
     myData.users.push(b);
-    res.json(b);
+    res.redirect(`/users/${myData.users.length - 1}`);
   })
 
   app.post('/schedules', (req, res) => {
@@ -83,9 +91,8 @@ app.post('/users', (req, res) => {
       "end_at": newSchedule.end_at
     }
     myData.schedules.push(b);
-    res.json(b);
+    res.redirect(`/schedules`);
   })
-
 
   // listen to port 3000
 app.listen(3000, () => {

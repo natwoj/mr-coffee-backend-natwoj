@@ -41,9 +41,7 @@ app.get("/users", (req, res, next) => {
   })
 app.get("/schedules", (req, res) => {
   res.render('schedules', { title: "All schedules", schedules: myData.schedules })
-  
 });
-
 app.get("/users/:id", (req, res, next) => {
   const idNumber = req.params.id;
   idNumber >= myData.users.length ? res.render('user_details', {'title':'No such user'}) : res.render('user_details', {'title': `User ${idNumber}`, 'users': myData.users[idNumber]});
@@ -65,7 +63,7 @@ app.get("/users/:id/schedules", (req, res, next) => {
     res.render("user_schedules", {"title": "Set the date"});
     return;
   }
-  res.render("user_schedules", {"title": `User ${idNumber} schedules`, "schedule": arr });
+  res.render("user_schedules", {"title": ` User ${idNumber} schedules`, "schedule": arr });
 });
 
 // POST's

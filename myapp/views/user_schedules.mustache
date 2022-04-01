@@ -8,8 +8,13 @@
     <title>User schedules</title>
 </head>
 <body>
-<h1> {{title}}</h1>
+<h1>{{title}}</h1>
 {{#schedule}}
+<h2> Timeline for</h2>
+<h1>USER: {{user_id}} </h1>
+<p> Work day: {{day}} </p>
+<p> You start at: {{start_at}} </p>
+<p> You work till: {{end_at}} </p> 
 {{/schedule}}
 </body>
 </html> 

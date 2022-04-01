@@ -21,7 +21,8 @@ module.exports.users = [
 ]
 
 module.exports.schedules = [
-    {
+   
+   {
         'user_id': 0,
         'day': 1,
         'start_at': "2PM",
@@ -45,4 +46,4 @@ module.exports.schedules = [
         'start_at': "8AM",
         'end_at': "6PM"
     }
-]
+] 

@@ -25,25 +25,25 @@ module.exports.schedules = [
    {
         'user_id': 0,
         'day': 1,
-        'start_at': "2PM",
-        'end_at': "4PM"
+        'start_at': "0PM",
+        'end_at': "0PM"
     },
     {
         'user_id': 1,
         'day': 2,
-        'start_at': "2PM",
-        'end_at': "4PM"
+        'start_at': "1PM",
+        'end_at': "1PM"
     },
     {
         'user_id': 2,
         'day': 3,
         'start_at': "2PM",
-        'end_at': "4PM"
+        'end_at': "2PM"
     },
     {
         'user_id': 3,
         'day': 5,
-        'start_at': "8AM",
-        'end_at': "6PM"
+        'start_at': "3AM",
+        'end_at': "3PM"
     }
 ] 

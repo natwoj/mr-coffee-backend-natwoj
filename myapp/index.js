@@ -67,22 +67,19 @@ app.get("/users/:id/schedules", (req, res, next) => {
 });
 
 // POST's
-app.post('/users/new-user', (req, res) => {
-    const newUser = req.body;
-    const b = {
+app.post('/users/new', (req, res) => {
+  const newUser = req.body;
+  const b = {
       "firstname": newUser.firstname,
       "lastname": newUser.lastname,
       "email": newUser.email,
-      "password": sha256(newUser.password)
-    }
+      "password": newUser.password
+  };
     //newUser.password = sha256(newUser.password);
-    myData.users.push(b);
-    res.redirect(`/users`);
-    /** res.redirect(`/users/${myData.users.length - 1}`) */ 
-    ;
-  })
-
-  app.post('/schedules/new-schedule', (req, res) => {
+    myData.users.push(b)
+    res.redirect(`/users/${myData.users.length - 1}`) 
+  });
+  app.post('/schedules/new', (req, res) => {
     const newSchedule = req.body;
     const b = {
       "user_id": newSchedule.user_id,

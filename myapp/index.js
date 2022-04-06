@@ -19,6 +19,15 @@ const mustacheExpress = require('mustache-express');
   app.set('view engine', 'mustache');
   app.engine('mustache', mustacheExpress());
 
+  const { Pool } = require("pg");
+  const pool = new Pool({
+    user: 'postgres',
+    host: 'localhost',
+    database: 'mrcoffee', 
+    password: '1',
+    port: 5435,
+  })
+
 // GET's - new user, new schedule form
 
 app.get("/schedules/new", (req, res) => {
@@ -39,13 +48,14 @@ app.get("/users", (req, res, next) => {
     }
     res.render("users", { title: "All users",  users: usersNumber })
   })
-app.get("/schedules", (req, res) => {
-  res.render('schedules', { title: "All schedules", schedules: myData.schedules })
+app.get("/schedules", async (req, res, next) => {
+  let schedule = await pool.query("SELECT * FROM schedules ORDER BY day");
+  res.render('schedules', { title: "All schedules", schedules: schedule });
 });
 app.get("/users/:id", (req, res, next) => {
   const idNumber = req.params.id;
   idNumber >= myData.users.length ? res.render('user_details', {'title':'No such user'}) : res.render('user_details', {'title': `User ${idNumber}`, 'users': myData.users[idNumber]});
-});
+})
 
 app.get("/users/:id/schedules", (req, res, next) => {
   const idNumber = req.params.id;

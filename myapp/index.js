@@ -49,8 +49,9 @@ app.get("/users", (req, res, next) => {
     res.render("users", { title: "All users",  users: usersNumber })
   })
 app.get("/schedules", async (req, res, next) => {
-  let schedule = await pool.query("SELECT * FROM schedules ORDER BY day");
-  res.render('schedules', { title: "All schedules", schedules: schedule });
+  let schedule = await pool.query("SELECT * FROM schedules");
+
+  res.render('schedules', { title: "All schedules", schedules: schedule.rows });
 });
 app.get("/users/:id", (req, res, next) => {
   const idNumber = req.params.id;

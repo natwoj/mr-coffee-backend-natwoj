@@ -53,6 +53,7 @@ app.get("/schedules", async (req, res, next) => {
 
   res.render('schedules', { title: "All schedules", schedules: schedule.rows });
 });
+
 app.get("/users/:id", (req, res, next) => {
   const idNumber = req.params.id;
   idNumber >= myData.users.length ? res.render('user_details', {'title':'No such user'}) : res.render('user_details', {'title': `User ${idNumber}`, 'users': myData.users[idNumber]});
@@ -90,8 +91,8 @@ app.post('/users/new', (req, res) => {
     myData.users.push(b)
     res.redirect(`/users/${myData.users.length - 1}`) 
   });
-  app.post('/schedules/new', (req, res) => {
-    const newSchedule = req.body;
+
+  /* 3B - push data to data.js
     const b = {
       "user_id": newSchedule.user_id,
       "day": newSchedule.day,
@@ -99,9 +100,25 @@ app.post('/users/new', (req, res) => {
       "end_at": newSchedule.end_at
     }
     myData.schedules.push(b);
+  
+  app.post('/schedules/new', async (req, res) => {
+    const { user_id, day, start_at, end_at } = req.body;
+    await pool.query(`INSERT INTO schedules
+    (user_id, day, start_at, end_at)
+    VALUES
+    ('${user_id}', '${day}', '${start_at}', '${end_at}' 
+);`);
     res.redirect(`/schedules`);
   })
-
+*/
+  app.post("/schedules/new", async (req, res) => {
+    const {user_id, day, start_at, end_at } = req.body;
+    await pool.query(`INSERT INTO schedules
+        (user_id, day, start_at, end_at)
+        VALUES
+        ('${user_id}', '${day}', '${start_at}', '${end_at}');`);
+    res.redirect("/schedules");
+});
   // listen to port 3000
 app.listen(3000, () => {
   console.log(`http://localhost:3000/ is waiting for requests.`);

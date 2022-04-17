@@ -1,4 +1,9 @@
+html {
+background-image: url("apple-pixabay.jpg");
+background-repeat: no-repeat;
+background-size: cover;
+}
 h1 {
-    font-size: 60px;
+    font-size: 40px;
     color: blueviolet;
 }

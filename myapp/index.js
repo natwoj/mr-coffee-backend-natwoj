@@ -4,6 +4,7 @@ const myData = require("./data");
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false})); 
+const appFunctions = require('./functions');
 
 // dotenv for loading environmental variables
 const envVariables = require('dotenv').config()

@@ -6,14 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Schedule</title>
     <link rel="stylesheet" href="/static/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500&family=Roboto&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
 </head>
 <body>
-<h1> {{title}} </h1>
-<h2> All schedules <h2>
-{{#schedules}}
-{{firstname}}
-{{lastname}}
-{{email}}
-{{/schedules}}
+<div class ="main">
+    <div class="main__headers">
+        <h1 class="typing"> {{title}} </h1>
+        <h2> All schedules <h2>
+    </div>
+    <div class="main__content">
+        {{#schedules}}
+        {{firstname}}
+        {{lastname}}
+        {{email}}
+        {{/schedules}}
+    </div>
+</div>
 </body>
 </html> 

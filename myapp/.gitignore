@@ -4,3 +4,6 @@
 
 #mac files
 .DS_Store
+
+#dotenv files 
+.env 

@@ -5,6 +5,9 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false})); 
 
+// dotenv for loading environmental variables
+const envVariables = require('dotenv').config()
+
 // using static folder - css, images
 app.use('/static', express.static('public'))
 
@@ -21,10 +24,11 @@ const mustacheExpress = require('mustache-express');
 
   const { Pool } = require("pg");
   const pool = new Pool({
-    user: 'postgres',
-    host: 'localhost',
-    database: 'mrcoffee', 
-    password: '1',
+
+    user: process.env.USER_ID,
+    host: process.env.HOST,
+    database: process.env.DATABASE,
+    password: process.env.PASSWORD,
     port: 5435,
   })
 

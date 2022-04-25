@@ -6,6 +6,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false})); 
 const appFunctions = require('./functions');
 
+const typeWriter = require('typewriter-effect/dist/core');
+
 // dotenv for loading environmental variables
 const envVariables = require('dotenv').config()
 
@@ -24,6 +26,7 @@ const mustacheExpress = require('mustache-express');
   app.engine('mustache', mustacheExpress());
 
   const { Pool } = require("pg");
+const { request } = require("express");
   const pool = new Pool({
 
     user: process.env.USER_ID,
@@ -44,7 +47,11 @@ app.get("/users/new", (req, res) => {
 });
 
 app.get("/", (req, res) => {
-  res.render('index', { title: "Welcome to Schedules App for Mr. Coffee employees"})
+  const newTypewriter = new Typewriter('typewriter', {
+    strings: ['Welcome to', 'Schedules App', 'for', 'Mr. Coffee employees'],
+    autoStart: true,
+  });
+  res.render('index', { title: newTypewriter})
 })
 app.get("/users", (req, res, next) => {
     const usersNumber = [...myData.users];                  

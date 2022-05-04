@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link type="text/css" href="/static/layout.css" />
+    <title>{{title}}</title>
+</head>
+<body>
+ <header class="header">
+        <div>
+            <div>
+                <!-- logo --> 
+            </div>
+            <nav class="header__nav">
+                <ul class="header_nav_list">
+                    <li class="header_nav_listitem">
+                        <a href="#" class="link">
+                            Sign in
+                        </a>
+                    </li>
+                    <li class="header_nav_list_item">
+                        <a href="#" class="link">
+                            Log out
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+<h1> {{title}}</h1>
+<h2> list of users <h2>
+{{#users}}
+{{firstname}}
+{{lastname}}
+{{/users}}
+<div> 
+        <ul>
+            <li>
+                <a href="/users/new">
+                    Not on the list? Add new employee
+                </a>
+            </li>
+        </ul>
+</div>
+</body>
+</html> 

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule</title>
+    <link rel="stylesheet" href="/static/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500&family=Roboto&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
+</head>
+<body>
+<div class ="main">
+    <div class="main__headers">
+        <h1 id = "typewriter"> {{title}} </h1>
+        <h2> All schedules <h2>
+    </div>
+    <div class="main__content">
+        {{#schedules}}
+        {{firstname}}
+        {{lastname}}
+        {{email}}
+        {{/schedules}}
+    </div>
+
+</div>
+</body>
+</html> 

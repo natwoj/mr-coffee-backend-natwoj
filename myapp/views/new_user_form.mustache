@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link type="text/css" href="/public/style.css" />
+    <title>{{title}}</title>
+</head>
+<body>
+<h1>{{title}}</h1>
+<form class="form" method="post">
+  <label for="name">First name:</label><br>
+  <input type="text" id="firstname" name="firstname" required pattern="[A-Za-z]{2,}"><br>
+  <label for="name">Last name:</label><br>
+  <input type="text" id="lastname" name="lastname" required pattern="[A-Za-z]{3,}"><br>
+  <label for="name">Email</label><br>
+  <input type="text" id="email" name="email" required><br>
+  <label for="pass">Password</label><br>
+  <input type="password" id="pass" name="pass" required pattern=".{8,}"><br>
+  <input type="submit" value="Submit">
+</form> 
+</body>
+</html> 
